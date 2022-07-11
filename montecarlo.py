@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 # REMEMBER TO CHANGE FROM PROTECTED TO PRIVATE
+# REMEMBER TO ADD DOCSTRINGS
 class Die:
     '''
     This class creates a die with weights and allows for changing of those weights as well as
@@ -48,9 +49,66 @@ class Die:
         '''
         return self.__die
 
-myDie = Die(np.array(['first', 'second', 'third', 'fourth', 'fifth']))
-myDie.change_weight('first', 'tree')
-myDie.change_weight('whale', 3)
-myDie.change_weight('second', 100)
-myDie.roll(rolls=100)
-myDie.show_die()
+
+class Game:
+    '''
+    This class creates a game in which any number of already specified die are rolled a specified
+    amount of times and resutls can be shown in two different formats.
+    INPUTS: 
+        die_list (list): a list of already initialized die using the Die class.
+    '''
+    def __init__(self, die_list):
+        self.die_list = die_list
+    def play(self, n_times):
+        '''
+        PURPOSE:
+            Roll each of the die a specified number of times
+        INPUTS: 
+            n_times (int): Number of times to roll each die
+        OUTPUTS: No outputs
+        '''
+        self.__roll_results = pd.DataFrame([die.roll(n_times) for die in self.die_list]).T
+        self.__roll_results.index.name = 'roll'
+    def show_results(self, view="wide"):
+        '''
+        PURPOSE:
+            Show the game's results
+        INPUTS: 
+            View (str): Takes two options, wide or narrow, and formats the results accordingly 
+                (OPTIONAL - defaults to wide)
+                    In wide format, the columns are the die and the rows are the roll numbers
+                    In narrow format, the index has both the die and roll number and there is a sole column for face rolled
+        OUTPUTS:
+            Pandas DataFrame of the faces rolled in specified view format
+        '''
+        if view == 'wide':
+            return self.__roll_results
+        elif view == 'narrow':
+            return self.__roll_results.stack()
+        else:
+            raise ValueError("The inputted view format is not applicable, try \"wide\" or \"narrow\"")
+
+
+class Analyzer:
+    def __init__(self, game, n_times):
+        self.game = game
+        self.game.play(n_times)
+        self.game_results = self.game.show_results()
+    def jackpot(self):
+        self.jackpot_count = 0
+        for i in range(len(self.game_results)):
+            if len(self.game_results.iloc[i,:].unique()) == 1:
+                self.jackpot_count += 1
+        return self.jackpot_count
+        # Store this integer as a dataframe?
+
+unfair_coin = Die(['heads', 'tails'])
+unfair_coin.change_weight('tails', 0)
+fair_coin = Die(['heads', 'tails'])
+myGame = Game([unfair_coin,fair_coin])
+myGame.play(10)
+me = Analyzer(myGame, 100)
+me.jackpot()
+me.game_results
+len(myGame.show_results())
+len(myGame.show_results().iloc[0,:].unique())
