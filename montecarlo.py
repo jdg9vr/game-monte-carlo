@@ -96,19 +96,15 @@ class Analyzer:
         self.game_results = self.game.show_results()
     def jackpot(self):
         self.jackpot_count = 0
+        self.jackpots = pd.DataFrame()
         for i in range(len(self.game_results)):
             if len(self.game_results.iloc[i,:].unique()) == 1:
                 self.jackpot_count += 1
+                self.jackpots = pd.concat([self.jackpots, pd.DataFrame(self.game_results.iloc[i,:]).T])
         return self.jackpot_count
-        # Store this integer as a dataframe?
-
-unfair_coin = Die(['heads', 'tails'])
-unfair_coin.change_weight('tails', 0)
-fair_coin = Die(['heads', 'tails'])
-myGame = Game([unfair_coin,fair_coin])
-myGame.play(10)
-me = Analyzer(myGame, 100)
-me.jackpot()
-me.game_results
-len(myGame.show_results())
-len(myGame.show_results().iloc[0,:].unique())
+    def combo(self):
+        self.combos = self.game_results.apply(lambda x: pd.Series(sorted(x)), 1).value_counts().to_frame('size')
+        return self.combos
+    def face_counts(self):
+        self.face_counts_per_roll = self.game_results.apply(lambda x: x.value_counts(), 1).fillna(0)
+        return self.face_counts_per_roll
