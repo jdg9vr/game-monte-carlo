@@ -90,11 +90,25 @@ class Game:
 
 
 class Analyzer:
+    '''
+    PURPOSE:
+        This class takes a game object and performs analyses on it, including number of jackpots,
+        number of unique combinations, and a sparse dataset of counts of each face by roll.
+    INPUTS:
+        Game object
+    '''
     def __init__(self, game, n_times):
         self.game = game
         self.game.play(n_times)
         self.game_results = self.game.show_results()
     def jackpot(self):
+        '''
+        PURPOSE:
+            Count the amount of jackpots in the game, as defined as when all die in a roll have the same face.
+        INPUTS: No inputs
+        OUTPUTS:
+            The count of jackpots as an integer
+        '''
         self.jackpot_count = 0
         self.jackpots = pd.DataFrame()
         for i in range(len(self.game_results)):
@@ -103,8 +117,21 @@ class Analyzer:
                 self.jackpots = pd.concat([self.jackpots, pd.DataFrame(self.game_results.iloc[i,:]).T])
         return self.jackpot_count
     def combo(self):
+        '''
+        PURPOSE:
+            Show a table that has the unique counts of each combination of rolls that was rolled.
+        INPUTS: No inputs
+        OUTPUTS:
+            A dataframe of counts of unique rolls (order does not matter)
+        '''
         self.combos = self.game_results.apply(lambda x: pd.Series(sorted(x)), 1).value_counts().to_frame('size')
         return self.combos
     def face_counts(self):
+        '''
+        PURPOSE: Show a table of counts of each face on each roll
+        INPUTS: No inputs
+        OUTPUTS:
+            A sparse dataframe of counts of each face on each roll
+        '''
         self.face_counts_per_roll = self.game_results.apply(lambda x: x.value_counts(), 1).fillna(0)
         return self.face_counts_per_roll

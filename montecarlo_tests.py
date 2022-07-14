@@ -1,13 +1,19 @@
 import pandas as pd
 import numpy as np
 import unittest
-import montecarlo
 from montecarlo import Die
 from montecarlo import Game
 from montecarlo import Analyzer
 
 class MontecarloTestSuites(unittest.TestCase):
     def test_1_show_weights(self):
+        '''
+        PURPOSE:
+            Test the show weights function
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         # test that show_weights shows the die weights
         myDie = Die(np.array(['first', 'second', 'third', 'fourth', 'fifth']))
         
@@ -16,6 +22,13 @@ class MontecarloTestSuites(unittest.TestCase):
         check = myDie.show_die().equals(expected)
         self.assertTrue(check)
     def test_2_change_weight(self):
+        '''
+        PURPOSE:
+            Test the change function including errors
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         # change weight and see if it was changed
         myDie = Die(np.array(['first', 'second', 'third', 'fourth', 'fifth']))
         myDie.change_weight('first', 100)
@@ -27,11 +40,25 @@ class MontecarloTestSuites(unittest.TestCase):
         with self.assertRaises(TypeError):
             myDie.change_weight('first', 'new')
     def test_3_roll(self):
+        '''
+        PURPOSE:
+            Test the roll function
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         myDie = Die(np.array(['first', 'second']))
         myDie.change_weight('second', 0)
         roll_1 = myDie.roll()[0]
         self.assertEqual(roll_1, 'first')
     def test_4_play_and_show_results(self):
+        '''
+        PURPOSE:
+            Test the play function and show results function and errors
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         unfair_coin = Die(['heads', 'tails'])
         unfair_coin.change_weight('tails', 0)
         unfair_die = Die([1, 2, 3, 4, 5,6])
@@ -50,6 +77,13 @@ class MontecarloTestSuites(unittest.TestCase):
         with self.assertRaises(ValueError):
             myGame.show_results('thin')
     def test_5_jackpot(self):
+        '''
+        PURPOSE:
+            Test the jackpot function
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         unfair_die = Die([1, 2, 3, 4, 5, 6])
         unfair_die.change_weight(1, 0)
         unfair_die.change_weight(2, 0)
@@ -68,6 +102,13 @@ class MontecarloTestSuites(unittest.TestCase):
         check = dieAnalysis.jackpot()==0
         self.assertTrue(check)
     def test_6_jackpots(self):
+        '''
+        PURPOSE:
+            Test the jackpot dataframe resulting from the jackpot function
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         fair_die = Die([1, 2, 3, 4, 5, 6])
         unfair_die = Die([1, 2, 3, 4, 5, 6])
         unfair_die.change_weight(1, 0)
@@ -86,6 +127,13 @@ class MontecarloTestSuites(unittest.TestCase):
         check = dieAnalysis.jackpots.apply(lambda x: len(x.unique())-1, 1).sum() == 0
         self.assertTrue(check)
     def test_7_combo(self):
+        '''
+        PURPOSE:
+            Test the combo function
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         fair_die = Die([1, 2, 3, 4, 5, 6])
         unfair_die = Die([1, 2, 3, 4, 5, 6])
         unfair_die.change_weight(1, 0)
@@ -102,6 +150,13 @@ class MontecarloTestSuites(unittest.TestCase):
         dieAnalysis = Analyzer(myGameDie, 1000)
         self.assertTrue(isinstance(dieAnalysis.combo().index, pd.MultiIndex))
     def test_8_face_counts(self):
+        '''
+        PURPOSE:
+            Test the face counts function
+        INPUTS: No inputs
+        OUTPUTS:
+            Ok for successful test
+        '''
         unfair_die = Die([1, 2, 3, 4, 5, 6])
         unfair_die.change_weight(1, 0)
         unfair_die.change_weight(2, 0)
