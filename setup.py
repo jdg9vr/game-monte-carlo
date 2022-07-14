@@ -7,4 +7,4 @@ setup(name='game-monte-carlo',
       author='Josh Gen',
       author_email='jdg9vr@virginia.edu',
       license='MIT',
-      packages=['game-monte-carlo'])
+      packages=['game_monte_carlo'])
