@@ -206,7 +206,3 @@ This is the init file in the package that allows the computer to locate the pack
 
 #### montecarlo.py
 This is the module file which contains the three classes Die, Game, and Analyzer and is the bulk of the project
-
-
-
-### Game-MonteCarlo
