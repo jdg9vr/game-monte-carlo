@@ -176,3 +176,37 @@ face_counts_per_roll (pandas DataFrame): A sparse DataFrame of counts of each fa
 
 # Manifest
 
+#### git.ignore
+This file contains all the file types to ignore in the repo, including DS_Store, .vscode, and others
+
+#### LICENSE
+This file contains the internet license for this package
+
+#### README.md
+This file describes the important parts of the project and explains each class, method, and attribute in detail
+
+#### montecarlo_tests.py
+This file runs tests on the montecarlo module in the game-monte-carlo package
+
+#### montecarlo_tests.txt
+This file contains the output of running the montecarlo_tests.py file showing that the tests all passed
+
+#### scenarios.ipynb
+This file describes multiple scenarios of using this game ranging from simple coin flipping to word creation with demonstrations of the package's functionality
+
+#### setup.py
+This file contains important information for the computer to setup the package using pip install
+
+#### valid_guesses.csv
+This is a csv file containing the valid guesses for the popular computer game Wordle and is used in the scenarios.ipynb file
+
+### game_monte_carlo
+#### __init__.py
+This is the init file in the package that allows the computer to locate the package when pip install is run. This file contains a print statement indicating successful installment and also preloads shortcuts so the import imports the functions directly
+
+#### montecarlo.py
+This is the module file which contains the three classes Die, Game, and Analyzer and is the bulk of the project
+
+
+
+### Game-MonteCarlo
