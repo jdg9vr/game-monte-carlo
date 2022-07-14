@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-# REMEMBER TO CHANGE FROM PROTECTED TO PRIVATE
-# REMEMBER TO ADD DOCSTRINGS
 class Die:
     '''
     This class creates a die with weights and allows for changing of those weights as well as
