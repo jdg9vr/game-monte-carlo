@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 import unittest
-from montecarlo import Die
-from montecarlo import Game
-from montecarlo import Analyzer
+from game_monte_carlo.montecarlo import Die
+from game_monte_carlo.montecarlo import Game
+from game_monte_carlo.montecarlo import Analyzer
 
 class MontecarloTestSuites(unittest.TestCase):
     def test_1_show_weights(self):
