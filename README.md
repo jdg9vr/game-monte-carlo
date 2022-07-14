@@ -176,8 +176,11 @@ face_counts_per_roll (pandas DataFrame): A sparse DataFrame of counts of each fa
 
 # Manifest
 
-#### final_project_submission.ipynb
+#### FinalProjectSubmission.ipynb
 This file contains a combined version of all the important code in one easy-to-read document.
+
+#### FinalProjectSubmission.pdf
+This file is the pdf version of the above FinalProjectSubmission.ipynb file.
 
 #### git.ignore
 This file contains all the file types to ignore in the repo, including DS_Store, .vscode, and others
