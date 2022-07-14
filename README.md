@@ -188,14 +188,14 @@ This file contains the internet license for this package
 #### README.md
 This file describes the important parts of the project and explains each class, method, and attribute in detail
 
+#### montecarlo_demo.ipynb
+This file describes multiple scenarios of using this game ranging from simple coin flipping to word creation with demonstrations of the package's functionality
+
 #### montecarlo_tests.py
 This file runs tests on the montecarlo module in the game-monte-carlo package
 
 #### montecarlo_tests.txt
 This file contains the output of running the montecarlo_tests.py file showing that the tests all passed
-
-#### scenarios.ipynb
-This file describes multiple scenarios of using this game ranging from simple coin flipping to word creation with demonstrations of the package's functionality
 
 #### setup.py
 This file contains important information for the computer to setup the package using pip install
