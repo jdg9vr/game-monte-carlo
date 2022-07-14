@@ -1,0 +1,1 @@
+print('Montecarlo game loaded!')
